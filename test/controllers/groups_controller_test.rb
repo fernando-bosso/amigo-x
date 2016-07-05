@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
   setup do
-    #@user = User.create(username: "joe", email: "joe@example.com", password: "123123")
+    @user= users(:one)
     @group = groups(:one)
   end
 
@@ -19,7 +19,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test "should create group" do
     assert_difference('Group.count') do
-      post :create, group: { description: @group.description, name: @group.name }
+      post :create, group: { description: @group.description, name: @group.name, user_id: @user.id}
     end
 
     assert_redirected_to group_path(assigns(:group))
